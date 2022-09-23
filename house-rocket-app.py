@@ -21,7 +21,7 @@ def get_all_data(path):
     dataframes_list = []
 
     for i in range(len(files)):
-        temp_df = pd.read_csv(f"./{path}"+files[i], sep=r'\s*,\s*',header=0, encoding='ascii', engine='python')
+        temp_df = pd.read_csv(f"./{path}"+files[i], sep = ',', skipinitialspace = True)
         dataframes_list.append(temp_df) 
                
     return dataframes_list
