@@ -56,7 +56,7 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
     # BUY FILTERS
     st.sidebar.header('Buy Suggestions and Suggested Buy Prices Options') # filter header
     f_zipcode = st.sidebar.multiselect('Enter Zip Code', df_buy['zipcode'].unique(),key=1) # zipcode filter
-    f_season = st.sidebar.multiselect('Select Season', df_buy['adseason'].unique(),key=2) # adseason filter
+    f_season = st.sidebar.multiselect('Select Season', df_buy["adseason"].unique(),key=2) # adseason filter
     f_buy = st.sidebar.multiselect('Select Buy Suggestion', df_buy['buysuggestion'].unique(),key=3) # buysuggestion filter
     
     # gathering the filters
@@ -201,6 +201,6 @@ if __name__ == '__main__':
     df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
 
     # BUILD APP    
-    suggestion(df_sell_final, df_buy, ['askedprice','buysuggestion','suggestedbuyprice'],df_buy)
+    suggestion(df_sell_final, df_buy, ["askedprice","buysuggestion","suggestedbuyprice"],df_buy)
     financial_results(df_profit,med_avg_profit_by_zipcode_season)
     insights()
