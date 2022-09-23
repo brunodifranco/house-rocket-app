@@ -53,7 +53,7 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
     # BUY FILTERS
     st.sidebar.header('Buy Suggestions and Suggested Buy Prices Options') # filter header
     f_zipcode = st.sidebar.multiselect('Enter Zip Code', df_buy['zipcode'].unique(),key=1) # zipcode filter
-    f_season = st.sidebar.multiselect('Select Season', df_buy.get('ad_season', default=value_if_no_column).unique(),key=2) # ad_season filter
+    f_season = st.sidebar.multiselect('Select Season', df_buy.get('ad_season').unique(),key=2) # ad_season filter
     f_buy = st.sidebar.multiselect('Select Buy Suggestion', df_buy['buy_suggestion'].unique(),key=3) # buy_suggestion filter
     
     # gathering the filters
