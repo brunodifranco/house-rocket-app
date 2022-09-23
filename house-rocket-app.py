@@ -27,7 +27,7 @@ def get_all_data(path):
     return dataframes_list
 
 # ASSIGN DATA
-def assign_data():
+def assign_data(dataframes_list):
     df_buy = dataframes_list[1]
     df_geo = dataframes_list[4]
     df_profit = dataframes_list[5]    
@@ -195,7 +195,7 @@ if __name__ == '__main__':
     dataframes_list = get_all_data(path)     
     
     # ASSIGN DATA
-    df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data()
+    df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
 
     # BUILD APP    
     suggestion(df_sell_final, df_buy, ['asked_price','buy_suggestion','suggested_buy_price'],df_buy)
