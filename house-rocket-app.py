@@ -56,31 +56,31 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
     # BUY FILTERS
     st.sidebar.header('Buy Suggestions and Suggested Buy Prices Options') # filter header
     f_zipcode = st.sidebar.multiselect('Enter Zip Code', df_buy['zipcode'].unique(),key=1) # zipcode filter
-    f_season = st.sidebar.multiselect('Select Season', df_buy['ad_season'].unique(),key=2) # ad_season filter
-    f_buy = st.sidebar.multiselect('Select Buy Suggestion', df_buy['buy_suggestion'].unique(),key=3) # buy_suggestion filter
+    f_season = st.sidebar.multiselect('Select Season', df_buy['adseason'].unique(),key=2) # adseason filter
+    f_buy = st.sidebar.multiselect('Select Buy Suggestion', df_buy['buysuggestion'].unique(),key=3) # buysuggestion filter
     
     # gathering the filters
     if (f_season != []) & (f_zipcode != []) & (f_buy != []): 
-        df_buy = df_buy.loc[ (df_buy['ad_season'].isin(f_season)) & (df_buy['zipcode'].isin(f_zipcode)) & (df_buy['buy_suggestion'].isin(f_buy)),:]            
+        df_buy = df_buy.loc[ (df_buy['adseason'].isin(f_season)) & (df_buy['zipcode'].isin(f_zipcode)) & (df_buy['buysuggestion'].isin(f_buy)),:]            
     elif (f_season == []) & (f_zipcode != []) & (f_buy != []):
-        df_buy = df_buy.loc[(df_buy['zipcode'].isin(f_zipcode))&(df_buy['buy_suggestion'].isin(f_buy)),:]
+        df_buy = df_buy.loc[(df_buy['zipcode'].isin(f_zipcode))&(df_buy['buysuggestion'].isin(f_buy)),:]
     elif (f_season != []) & (f_zipcode == []) & (f_buy != []):  
-        df_buy = df_buy.loc[(df_buy['ad_season'].isin(f_season))&(df_buy['buy_suggestion'].isin(f_buy)),:]
+        df_buy = df_buy.loc[(df_buy['adseason'].isin(f_season))&(df_buy['buysuggestion'].isin(f_buy)),:]
     elif (f_season != []) & (f_zipcode != []) & (f_buy == []):  
-        df_buy = df_buy.loc[(df_buy['ad_season'].isin(f_season))&(df_buy['zipcode'].isin(f_zipcode)),:]             
+        df_buy = df_buy.loc[(df_buy['adseason'].isin(f_season))&(df_buy['zipcode'].isin(f_zipcode)),:]             
     elif (f_season != []) & (f_zipcode == []) & (f_buy == []): 
-        df_buy = df_buy.loc[df_buy['ad_season'].isin(f_season), :] 
+        df_buy = df_buy.loc[df_buy['adseason'].isin(f_season), :] 
     elif (f_season == []) & (f_zipcode != []) & (f_buy == []): 
         df_buy = df_buy.loc[df_buy['zipcode'].isin(f_zipcode), :]        
     elif (f_season == []) & (f_zipcode == []) & (f_buy != []): 
-        df_buy = df_buy.loc[df_buy['buy_suggestion'].isin(f_buy), :]         
+        df_buy = df_buy.loc[df_buy['buysuggestion'].isin(f_buy), :]         
     else:
         df_buy = df_buy.copy() # Caso contrário mostra tudo (default)
         
     # BUY
     st.subheader('Buy Suggestions and Suggested Buy Prices')
     st.markdown('Below are displayed the buy suggestions (whether a property should or should not be bought), as well as suggested buy prices for the properties that got a Yes suggestion.')
-    df_buy_final = df_buy[['id','date','ad_season','zipcode','median_price_zipcode_season','asked_price','buy_suggestion','suggested_buy_price']]
+    df_buy_final = df_buy[['id','date','adseason','zipcode','medianpricezipcodeseason','askedprice','buysuggestion','suggestedbuyprice']]
     st.write(df_buy_final)           
 
     # SUGGESTION MAP
@@ -88,19 +88,19 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
     st.markdown('For better visualization a map is display below with the suggested properties to be bought, as well as their respective suggested buy price.')
     
     # SUGGESTION MAP FILTERS
-    min_price_map = int(data_mapa['asked_price'].min())
-    max_price_map = int(data_mapa['asked_price'].max())
+    min_price_map = int(data_mapa['askedprice'].min())
+    max_price_map = int(data_mapa['askedprice'].max())
     st.sidebar.header('Suggestion Map Options') # filter header
     f_price = st.sidebar.slider('Max Buy Price', min_price_map, max_price_map, max_price_map) # buy price filter
    
-    properties = data_mapa[(data_mapa['asked_price'] <= f_price)] # making the filter functional
+    properties = data_mapa[(data_mapa['askedprice'] <= f_price)] # making the filter functional
     map_ = px.scatter_mapbox(properties, 
                              lat='lat', 
                              lon='long',
-                             size='asked_price', # Size based on the asked price 
+                             size='askedprice', # Size based on the asked price 
                              hover_name='id',
                              hover_data=hover_col, 
-                             color='buy_suggestion', # Color based on whether the buy suggestion is 'Yes' or 'No'
+                             color='buysuggestion', # Color based on whether the buy suggestion is 'Yes' or 'No'
                              color_continuous_scale='rdgy', 
                              zoom=8.5, 
                              height=400)
@@ -119,16 +119,16 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
     f_profit = st.sidebar.slider('Max Profit', min_profit, max_profit, max_profit) # profit filter  
     df_sell_final = df_sell_final[(df_sell_final['profit'] <= f_profit)] # making the filter functional   
     
-    f_zipcode = st.sidebar.multiselect('Enter Zip Code', df_sell_final['zipcode'].unique(),key=5) # zipcode filter
-    f_season = st.sidebar.multiselect('Select Season', df_sell_final['ad_season'].unique(),key=6) # ad_season filter
+    f_zipcode = st.sidebar.multiselect('Enter Zip Code', df_sell_final['adseason'].unique(),key=5) # zipcode filter
+    f_season = st.sidebar.multiselect('Select Season', df_sell_final['adseason'].unique(),key=6) # adseason filter
     
     # gathering the filters
     if (f_season != []) & (f_zipcode != []): 
-        df_sell_final = df_sell_final.loc[(df_sell_final['zipcode'].isin(f_zipcode))&(df_sell_final['ad_season'].isin(f_season))]
+        df_sell_final = df_sell_final.loc[(df_sell_final['zipcode'].isin(f_zipcode))&(df_sell_final['adseason'].isin(f_season))]
     elif (f_season == []) & (f_zipcode != []): 
         df_sell_final = df_sell_final.loc[df_sell_final['zipcode'].isin(f_zipcode), :] 
     elif (f_season != []) & (f_zipcode == []): 
-        df_sell_final = df_sell_final.loc[df_sell_final['ad_season'].isin(f_season), :]       
+        df_sell_final = df_sell_final.loc[df_sell_final['adseason'].isin(f_season), :]       
     else:
         df_sell_final = df_sell_final.copy() 
     st.write(df_sell_final)   
@@ -139,7 +139,7 @@ def suggestion(df_sell_final, data_mapa, hover_col, df_buy):
 def financial_results(df_profit, data):    
     # INTRO - FINANCIAL RESULTS
     st.header('Financial Results')
-    st.markdown('Two interesting metrics to evaluate the financial performance for this solution is the mean and median, grouped by ad_season, zipcode and ad_season with zipcode.')
+    st.markdown('Two interesting metrics to evaluate the financial performance for this solution is the mean and median, grouped by adseason, zipcode and adseason with zipcode.')
     st.subheader('Profit Descriptive Analysis')  
     st.write(df_profit)
     st.sidebar.header('Average and Median Profit Options')
@@ -147,15 +147,15 @@ def financial_results(df_profit, data):
     
     # MED_AVG_PROFIT FILTERS
     f_zipcode = st.sidebar.multiselect('Enter Zip Code', data['zipcode'].unique()) # zipcode filter
-    f_season = st.sidebar.multiselect('Select Season', data['ad_season'].unique()) # ad_season filter
+    f_season = st.sidebar.multiselect('Select Season', data['adseason'].unique()) # adseason filter
     
     # gathering the filters
     if (f_season != []) & (f_zipcode != []): 
-        data = data.loc[(data['zipcode'].isin(f_zipcode))&(data['ad_season'].isin(f_season))] 
+        data = data.loc[(data['zipcode'].isin(f_zipcode))&(data['adseason'].isin(f_season))] 
     elif (f_season == []) & (f_zipcode != []): 
         data = data.loc[data['zipcode'].isin(f_zipcode), :] 
     elif (f_season != []) & (f_zipcode == []): 
-        data = data.loc[data['ad_season'].isin(f_season), :] 
+        data = data.loc[data['adseason'].isin(f_season), :] 
     else:
         data = data.copy()
     st.write(data)
@@ -201,6 +201,6 @@ if __name__ == '__main__':
     df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
 
     # BUILD APP    
-    suggestion(df_sell_final, df_buy, ['asked_price','buy_suggestion','suggested_buy_price'],df_buy)
+    suggestion(df_sell_final, df_buy, ['askedprice','buysuggestion','suggestedbuyprice'],df_buy)
     financial_results(df_profit,med_avg_profit_by_zipcode_season)
     insights()
