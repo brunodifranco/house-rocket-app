@@ -37,6 +37,9 @@ def assign_data(dataframes_list):
     med_avg_profit_by_zipcode = dataframes_list[10]
     med_avg_profit_by_zipcode_season = dataframes_list[11]
     
+    for i in dataframes_list:
+        i.columns=i.columns.str.replace('[_]','')
+    
     return df_buy,df_geo, df_profit, df_sell, df_sell_final, df, med_avg_profit_by_zipcode, med_avg_profit_by_zipcode_season  
 ####################################################################################################################################################################################################
 # SUGGESTION
