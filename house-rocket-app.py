@@ -26,18 +26,18 @@ def get_all_data(path):
                
     return dataframes_list
 
-# ASSIGN DATA
-def assign_data(dataframes_list):
-    df_buy = dataframes_list[1]
-    df_geo = dataframes_list[4]
-    df_profit = dataframes_list[5]    
-    df_sell = dataframes_list[6]
-    df_sell_final = dataframes_list[7]
-    df = dataframes_list[8]
-    med_avg_profit_by_zipcode = dataframes_list[10]
-    med_avg_profit_by_zipcode_season = dataframes_list[11]
+# # ASSIGN DATA
+# def assign_data(dataframes_list):
+#     df_buy = dataframes_list[1]
+#     df_geo = dataframes_list[4]
+#     df_profit = dataframes_list[5]    
+#     df_sell = dataframes_list[6]
+#     df_sell_final = dataframes_list[7]
+#     df = dataframes_list[8]
+#     med_avg_profit_by_zipcode = dataframes_list[10]
+#     med_avg_profit_by_zipcode_season = dataframes_list[11]
     
-    return df_buy,df_geo, df_profit, df_sell, df_sell_final, df, med_avg_profit_by_zipcode, med_avg_profit_by_zipcode_season  
+#     return df_buy,df_geo, df_profit, df_sell, df_sell_final, df, med_avg_profit_by_zipcode, med_avg_profit_by_zipcode_season  
 ####################################################################################################################################################################################################
 
 
@@ -197,17 +197,14 @@ if __name__ == '__main__':
     # EXTRACT DATA
     path = 'data/' 
     dataframes_list = get_all_data(path)     
-    
+    st.write(dataframes_list[0])
+    st.write(dataframes_list[1])
+    st.write(dataframes_list[2])
+    st.write(dataframes_list[3])
+    st.write(dataframes_list[4])
     # ASSIGN DATA
-    df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
-    st.write(df_buy)
-    st.write(df_geo)
-    st.write(df_profit)
-    st.write(df_sell)
-    st.write(df_sell_final)
+#     df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
     st.write(df)
-    st.write(med_avg_profit_by_zipcode)
-    st.write(med_avg_profit_by_zipcode_season)
 
     
     
