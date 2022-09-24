@@ -201,6 +201,19 @@ if __name__ == '__main__':
     # ASSIGN DATA
     df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
     st.write(df_buy)
+    st.write(df_geo)
+    st.write(df_profit)
+    st.write(df_sell)
+    st.write(df_sell_final)
+    st.write(df)
+    st.write(med_avg_profit_by_zipcode)
+    st.write(med_avg_profit_by_zipcode_season)
+
+    
+    
+    
+    
+    
 
     # BUILD APP    
 #     suggestion(df_sell_final, df_buy, ['asked_price','buy_suggestion','suggested_buy_price'],df_buy)
