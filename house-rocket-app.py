@@ -26,14 +26,13 @@ st.write('**Author: Bruno Di Franco Albuquerque**') # author
                
 #     return dataframes_list
 
-
- def get_all_data():      
-        df_buy = pd.read_csv('df_buy.csv')
-        df_profit = pd.read_csv('df_profit.csv')
-        df_sell = pd.read_csv('df_sell.csv')
-        df_sell_final = pd.read_csv('df_sell_final.csv')
-        med_avg_profit_by_zipcode_season = pd.read_csv('med_avg_profit_by_zipcode_season.csv')        
-        return df_buy, df_profit, df_sell, df_sell_final, med_avg_profit_by_zipcode_season
+def get_all_data():
+  df_buy = pd.read_csv('df_buy.csv')
+  df_profit = pd.read_csv('df_profit.csv')
+  df_sell = pd.read_csv('df_sell.csv')
+  df_sell_final = pd.read_csv('df_sell_final.csv')
+  med_avg_profit_by_zipcode_season = pd.read_csv('med_avg_profit_by_zipcode_season.csv')        
+  return df_buy, df_profit, df_sell, df_sell_final, med_avg_profit_by_zipcode_season
 
 # # ASSIGN DATA
 # def assign_data(dataframes_list):
