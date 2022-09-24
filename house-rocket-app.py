@@ -16,15 +16,24 @@ st.write('**Author: Bruno Di Franco Albuquerque**') # author
 # FUNCTIONS
 ###################################################################################################################################################################################################
 # GET DATA
-def get_all_data(path):
-    path, dirs, files = next(os.walk(f"{path}"))
-    dataframes_list = []
+# def get_all_data(path):
+#     path, dirs, files = next(os.walk(f"{path}"))
+#     dataframes_list = []
 
-    for i in range(len(files)):
-        temp_df = pd.read_csv(f"./{path}"+files[i])
-        dataframes_list.append(temp_df) 
+#     for i in range(len(files)):
+#         temp_df = pd.read_csv(f"./{path}"+files[i])
+#         dataframes_list.append(temp_df) 
                
-    return dataframes_list
+#     return dataframes_list
+
+
+ def get_all_data():      
+        df_buy = pd.read_csv('df_buy.csv')
+        df_profit = pd.read_csv('df_profit.csv')
+        df_sell = pd.read_csv('df_sell.csv')
+        df_sell_final = pd.read_csv('df_sell_final.csv')
+        med_avg_profit_by_zipcode_season = pd.read_csv('med_avg_profit_by_zipcode_season.csv')        
+        return df_buy, df_profit, df_sell, df_sell_final, med_avg_profit_by_zipcode_season
 
 # # ASSIGN DATA
 # def assign_data(dataframes_list):
@@ -195,20 +204,15 @@ def get_all_data(path):
 ####################################################################################################################################################################################################
 if __name__ == '__main__':
     # EXTRACT DATA
-    path = 'data/' 
-    dataframes_list = get_all_data(path)     
-    st.write(dataframes_list[0])
-    st.write(dataframes_list[1])
-    st.write(dataframes_list[2])
-    st.write(dataframes_list[3])
-    st.write(dataframes_list[4])
+    df_buy, df_profit, df_sell, df_sell_final, med_avg_profit_by_zipcode_season = get_all_data()
+    st.write(df_buy)
+    st.write(df_profit)
+    st.write(df_sell)
+    st.write(df_sell_final)
+    st.write(med_avg_profit_by_zipcode_season)
     # ASSIGN DATA
 #     df_buy,df_geo,df_profit,df_sell,df_sell_final,df,med_avg_profit_by_zipcode,med_avg_profit_by_zipcode_season = assign_data(dataframes_list)
-    st.write(df)
 
-    
-    
-    
     
     
 
